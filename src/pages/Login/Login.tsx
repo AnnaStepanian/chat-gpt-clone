@@ -1,31 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 //styles
 import * as S from './Login.styled';
+
+//types
 import { IUserLogin, IUserLoginResponse } from '../../constants/types';
+import { useNavigate } from 'react-router-dom';
 
 export const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState<boolean>(false)
+
   const [userData, setUserData] = useState<IUserLogin>({
     login: '',
-    password: ''
+    password: '',
   });
 
   const handleChangeUserData = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setUserData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmitLoginForm = async () => {
-    const response = await axios.post<IUserLoginResponse>(process.env.REACT_APP_API_URL || 'http://example.com/api', userData);
+    const response = await axios.post<IUserLoginResponse>(
+      `${process.env.REACT_APP_API_URL}/login`,
+      userData,
+    );
 
     if (response.data.login === userData.login) {
-      localStorage.setItem('user', JSON.stringify(response.data))
+      localStorage.setItem('user', JSON.stringify(response.data));
+      setIsLogin(true);
     }
-  }
+  };
+
+  useEffect(() => {
+    if(isLogin || localStorage.getItem('user')) {
+      navigate('/chat')
+      console.log({ mtav: true })
+    }
+  }, [isLogin])
+
 
   return (
     <S.LoginContainer>
@@ -51,7 +69,9 @@ export const Login: React.FC = () => {
             onChange={handleChangeUserData}
           />
         </S.LoginLabel>
-        <S.LoginSubmitButton type="button" onClick={handleSubmitLoginForm}>Login Now</S.LoginSubmitButton>
+        <S.LoginSubmitButton type="button" onClick={handleSubmitLoginForm}>
+          Login Now
+        </S.LoginSubmitButton>
       </S.LoginForm>
     </S.LoginContainer>
   );

@@ -8,3 +8,10 @@ export interface IUserLoginResponse {
   password: string;
   premium: boolean;
 }
+
+export type UserType = "user" | "gpt";
+
+export interface IMessage {
+  message: string;
+  type: UserType;
+}
