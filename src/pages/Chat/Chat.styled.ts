@@ -5,16 +5,18 @@ export const ChatContainer = styled.div`
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: #555555;
+    background-color: #000000;
     height: 100vh;
 `;
 
 export const ChatWrapper = styled.div`
     max-width: 60vw;
+    height: 100vh;
     width: 100%;
 `;
 
 export const ChatHeader = styled.div`
+    height: 10%;
     display: flex;
     background-color: #1F1D1D;
     border-top-right-radius: 10px;
@@ -40,7 +42,7 @@ export const UserStatus = styled.div`
 `;
 
 export const ChatBody = styled.div`
-    height: 500px;
+    height: 90%;
     background: url('https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;

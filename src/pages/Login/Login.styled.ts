@@ -56,7 +56,7 @@ export const LoginSubmitButton = styled.button`
   outline: none;
   border: none;
   border-radius: 8px;
-  background: #fd7401;
+  background: #21FF5F;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -66,8 +66,4 @@ export const LoginSubmitButton = styled.button`
   padding: 13px 0;
   margin-top: 34px;
   cursor: pointer;
-
-  &:hover {
-    background: #dd6501;
-  }
 `;
